@@ -1,4 +1,4 @@
-package com.smeghani.firstkotlinapp.models
+package com.smeghani.firstkotlinapp.models.api
 
 import com.google.gson.annotations.SerializedName
 

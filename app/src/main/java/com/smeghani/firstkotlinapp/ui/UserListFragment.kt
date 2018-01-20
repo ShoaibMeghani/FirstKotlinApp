@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_user_list.*
 import kotlinx.android.synthetic.main.item_user.view.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.uiThread
 
 /**
@@ -25,7 +26,7 @@ class UserListFragment : Fragment() {
     //private lateinit var userList: UserList
 
     companion object {
-       // private val ARG_USER_LIST = "user_list"
+        // private val ARG_USER_LIST = "user_list"
 
         //Kotlin's version of Android's newInstance pattern
         fun newInstance(): UserListFragment {
@@ -50,7 +51,7 @@ class UserListFragment : Fragment() {
         doAsync {
             var response = api.getUsers()
             uiThread {
-                vUserList.adapter = UserListAdapter(response)
+                vUserList.adapter = UserListAdapter(response) { toast(it.name) }
             }
         }
 

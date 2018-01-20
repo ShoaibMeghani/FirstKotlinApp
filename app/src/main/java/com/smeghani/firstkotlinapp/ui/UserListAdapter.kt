@@ -13,14 +13,14 @@ import kotlinx.android.synthetic.main.item_user.view.*
 /**
  * Created by shoaibmeghani on 18/01/2018.
  */
-class UserListAdapter(private val userList: UserList) : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
+class UserListAdapter(private val userList: UserList, private val userClick: (User) -> Unit) : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return userList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         if (holder != null)
-            holder.bind(userList[position])
+            holder.bind(userList[position], userClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -30,10 +30,12 @@ class UserListAdapter(private val userList: UserList) : RecyclerView.Adapter<Use
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(user: User) {
+        fun bind(user: User, userClick: (User) -> Unit) {
             with(itemView) {
                 name.text = user.name
                 email.text = user.email
+                //using lambda for click listener
+                setOnClickListener { userClick(user) }
             }
         }
 
